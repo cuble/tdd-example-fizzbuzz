@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,20 +10,18 @@ public class FizzBuzzTests {
     FizzBuzz fizzBuzz;
 
     @BeforeEach
-    public void before() throws Exception {
+    public void before() {
         fizzBuzz = new FizzBuzz();
     }
 
-    @Test
-    @DisplayName("Say 1")
-    void BasePrintOne(){
-        assertEquals("1", fizzBuzz.Say(1));
-    }
-
-    @Test
-    @DisplayName("Say 2")
-    void BasePrintTwo(){
-        assertEquals("2", fizzBuzz.Say(2));
+    @ParameterizedTest(name = "Say {0} = {1}")
+    @CsvSource({
+            "1,   1",
+            "2,   2",
+            "7,   7"
+    })
+    void SayNormal(int i, String expectResult){
+        assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
     }
 
     @Test
