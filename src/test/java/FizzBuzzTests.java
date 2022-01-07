@@ -47,4 +47,16 @@ public class FizzBuzzTests {
     void BasePrintTen(){
         assertEquals("Buzz", fizzBuzz.Say(10));
     }
+
+    @Test
+    @DisplayName("Say 15")
+    void BasePrintFifteen(){
+        assertEquals("FizzBuzz", fizzBuzz.Say(15));
+    }
+
+    @Test
+    @DisplayName("Say 45")
+    void BasePrintFortyFive(){
+        assertEquals("FizzBuzz", fizzBuzz.Say(45));
+    }
 }
