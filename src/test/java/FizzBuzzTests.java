@@ -56,7 +56,7 @@ public class FizzBuzzTests {
         assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
     }
 
-    class FizzBuzzStub extends FizzBuzz{
+    static class FizzBuzzStub extends FizzBuzz{
         int counting=1;
 
         @Override
@@ -69,9 +69,24 @@ public class FizzBuzzTests {
 
     @Test
     @DisplayName("print 2")
-    void PrintThree(){
+    void PrintTwo(){
         fizzBuzz = new FizzBuzzStub();
         String result = fizzBuzz.Print(2);
         assertEquals("1\n2", result, "Print 2 should equal:\n1\n2" + "\n actual is:\n" + result);
     }
+
+    @Test
+    @DisplayName("print 5")
+    void PrintFive(){
+        fizzBuzz = new FizzBuzzStub();
+        String result = fizzBuzz.Print(5);
+        assertEquals("1\n2\n3\n4\n5", result, "Print 5 should equal:\n1\n2\n2\n3\n4\n5" + "\n actual is:\n" + result);
+    }
+
+    @Test
+    @DisplayName("test main")
+    void Main(){
+        fizzBuzz.main(null);
+    }
+
 }
