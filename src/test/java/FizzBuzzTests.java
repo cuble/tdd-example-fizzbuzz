@@ -4,9 +4,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.MockedConstruction;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class FizzBuzzTests {
@@ -84,10 +91,29 @@ public class FizzBuzzTests {
         assertEquals("1\n2\n3\n4\n5", result, "Print 5 should equal:\n1\n2\n2\n3\n4\n5" + "\n actual is:\n" + result);
     }
 
+    final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    final PrintStream originalOut = System.out;
+    private void PrepareForSystemOut(){
+        System.setOut(new PrintStream(outContent));
+    }
+
+    private void RestoreSystemOut(){
+        System.setOut(originalOut);
+    }
+
     @Test
     @DisplayName("test main")
     void Main(){
-        fizzBuzz.main(null);
+        final String check = "PrintCalled";
+        try(MockedConstruction<FizzBuzz> fizzBuzzMocked = Mockito.mockConstruction(FizzBuzz.class,
+                (mock, context)->{
+                    when(mock.Print(100)).thenReturn(check);
+                })){
+            PrepareForSystemOut();
+            fizzBuzz.main(null);
+            assertEquals(check+"\n", outContent.toString());
+            RestoreSystemOut();
+        }
     }
 
 }

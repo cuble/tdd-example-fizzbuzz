@@ -18,6 +18,7 @@ public class FizzBuzz {
     }
 
     public static void main(String[] argv){
-
+        FizzBuzz fizzBuzz = new FizzBuzz();
+        System.out.println(fizzBuzz.Print(100));
     }
 }
