@@ -1,13 +1,14 @@
 public class FizzBuzz {
     public String Say(int i) {
+        String result="";
         if(i%15==0){
-            return "FizzBuzz";
+            result = "FizzBuzz";
         }else if(i%5==0){
-            return "Buzz";
+            result = "Buzz";
         }else if(i%3==0){
-            return "Fizz";
-        }else {
-            return String.valueOf(i);
+            result = "Fizz";
         }
+        result = (result.equals(""))? String.valueOf(i):result;
+        return result;
     }
 }
