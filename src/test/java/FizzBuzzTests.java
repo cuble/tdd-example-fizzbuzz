@@ -53,4 +53,10 @@ public class FizzBuzzTests {
     void SayFizzBuzz(int i, String expectResult){
         assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
     }
+
+    @Test
+    @DisplayName("print 3")
+    void PrintThree(){
+        assertEquals("1\n2\n3", fizzBuzz.Print(3), "Print n should correct");
+    }
 }
