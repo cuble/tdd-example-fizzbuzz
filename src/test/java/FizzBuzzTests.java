@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.sql.PreparedStatement;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTests {
@@ -54,9 +56,22 @@ public class FizzBuzzTests {
         assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
     }
 
+    class FizzBuzzStub extends FizzBuzz{
+        int counting=1;
+
+        @Override
+        public String Say(int i){
+            assertEquals(i, counting, "checking sequence " + counting);
+            counting ++;
+            return String.valueOf(i);
+        }
+    }
+
     @Test
-    @DisplayName("print 3")
+    @DisplayName("print 2")
     void PrintThree(){
-        assertEquals("1\n2\n3", fizzBuzz.Print(3), "Print n should correct");
+        fizzBuzz = new FizzBuzzStub();
+        String result = fizzBuzz.Print(2);
+        assertEquals("1\n2", result, "Print 2 should equal:\n1\n2" + "\n actual is:\n" + result);
     }
 }

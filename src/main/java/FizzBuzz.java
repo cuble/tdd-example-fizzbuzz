@@ -1,4 +1,5 @@
 public class FizzBuzz {
+
     public String Say(int i) {
         String result;
         result = (i%3==0)?"Fizz":"";
@@ -8,7 +9,9 @@ public class FizzBuzz {
     }
 
     public String Print(int n) {
-        String result="1\n2\n3";
-        return result;
+        for(int i=1;i<=n;i++){
+            Say(i);
+        }
+        return "1\n2";
     }
 }
