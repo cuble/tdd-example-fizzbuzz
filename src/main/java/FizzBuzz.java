@@ -23,10 +23,10 @@ public class FizzBuzz {
     }
 
     public Boolean isThreeMatched(int i) {
-        return i%3==0;
+        return i%3==0|String.valueOf(i).contains("3");
     }
 
     public Boolean isFiveMatched(int i) {
-        return i%5==0;
+        return i%5==0|String.valueOf(i).contains("5");
     }
 }

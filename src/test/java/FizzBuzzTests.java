@@ -38,6 +38,15 @@ public class FizzBuzzTests {
 
     @ParameterizedTest(name = "Say {0} = {1}")
     @CsvSource({
+            "13,   true",
+            "31,   true"
+    })
+    void MatchThreeStage2Test(int i, Boolean expectResult){
+        assertEquals(expectResult, fizzBuzz.isThreeMatched(i), i + " Match three " + expectResult);
+    }
+
+    @ParameterizedTest(name = "Say {0} = {1}")
+    @CsvSource({
             "1,   false",
             "2,   false",
             "7,   false",
@@ -47,6 +56,15 @@ public class FizzBuzzTests {
     })
     void MatchFiveTest(int i, Boolean expectResult){
         assertEquals(expectResult, fizzBuzz.isFiveMatched(i), i + " Match three " + expectResult);
+    }
+
+    @ParameterizedTest(name = "Say {0} = {1}")
+    @CsvSource({
+            "51,   true",
+            "52,   true"
+    })
+    void MatchFiveStage2Test(int i, Boolean expectResult){
+        assertEquals(expectResult, fizzBuzz.isFiveMatched(i), i + " Match Five " + expectResult);
     }
 
     @Test
