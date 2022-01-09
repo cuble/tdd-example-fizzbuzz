@@ -3,7 +3,7 @@ public class FizzBuzz {
     public String Say(int i) {
         String result;
         result = (isThreeMatched(i))?"Fizz":"";
-        result = (i%5==0)?result+"Buzz":result;
+        result = (isFiveMatched(i))?result+"Buzz":result;
         result = (result.equals(""))? String.valueOf(i):result;
         return result;
     }
@@ -24,5 +24,9 @@ public class FizzBuzz {
 
     public Boolean isThreeMatched(int i) {
         return i%3==0;
+    }
+
+    public Boolean isFiveMatched(int i) {
+        return i%5==0;
     }
 }

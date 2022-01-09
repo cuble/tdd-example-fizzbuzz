@@ -25,16 +25,6 @@ public class FizzBuzzTests {
 
     @ParameterizedTest(name = "Say {0} = {1}")
     @CsvSource({
-            "1,   1",
-            "2,   2",
-            "7,   7"
-    })
-    void SayNormal(int i, String expectResult){
-        assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
-    }
-
-    @ParameterizedTest(name = "Say {0} = {1}")
-    @CsvSource({
             "1,   false",
             "2,   false",
             "7,   false",
@@ -46,44 +36,57 @@ public class FizzBuzzTests {
         assertEquals(expectResult, fizzBuzz.isThreeMatched(i), i + " Match three " + expectResult);
     }
 
+    @ParameterizedTest(name = "Say {0} = {1}")
+    @CsvSource({
+            "1,   false",
+            "2,   false",
+            "7,   false",
+            "5,   true",
+            "10,   true",
+            "15,   true"
+    })
+    void MatchFiveTest(int i, Boolean expectResult){
+        assertEquals(expectResult, fizzBuzz.isFiveMatched(i), i + " Match three " + expectResult);
+    }
+
     @Test
-    @DisplayName("Say When Match Three")
-    void SayWhenMatchThree(){
+    @DisplayName("Say When Not Match 3 and 5")
+    void SayWhenThreeAndFiveNotMatch(){
         fizzBuzz = spy(fizzBuzz);
         int notMatch = 1;
         when(fizzBuzz.isThreeMatched(notMatch)).thenReturn(false);
-        assertEquals(String.valueOf(notMatch), fizzBuzz.Say(notMatch), "three not match return number itself");
+        when(fizzBuzz.isFiveMatched(notMatch)).thenReturn(false);
+        assertEquals(String.valueOf(notMatch), fizzBuzz.Say(notMatch), "three and five not match return number itself");
     }
 
-
-    @ParameterizedTest(name = "Say {0} = {1}")
-    @CsvSource({
-            "3,   Fizz",
-            "6,   Fizz",
-            "9,   Fizz"
-    })
-    void SayFizz(int i, String expectResult){
-        assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
+    @Test
+    @DisplayName("Say When Match 3")
+    void SayWhenMatchThree(){
+        fizzBuzz = spy(fizzBuzz);
+        int matchThree = 3;
+        when(fizzBuzz.isThreeMatched(matchThree)).thenReturn(true);
+        when(fizzBuzz.isFiveMatched(matchThree)).thenReturn(false);
+        assertEquals("Fizz", fizzBuzz.Say(matchThree), "Say Fizz when match three only");
     }
 
-    @ParameterizedTest(name = "Say {0} = {1}")
-    @CsvSource({
-            "5,   Buzz",
-            "10,   Buzz",
-            "20,   Buzz"
-    })
-    void SayBuzz(int i, String expectResult){
-        assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
+    @Test
+    @DisplayName("Say When Match 5")
+    void SayWhenMatchFive(){
+        fizzBuzz = spy(fizzBuzz);
+        int matchFive = 5;
+        when(fizzBuzz.isThreeMatched(matchFive)).thenReturn(false);
+        when(fizzBuzz.isFiveMatched(matchFive)).thenReturn(true);
+        assertEquals("Buzz", fizzBuzz.Say(matchFive), "Say Buzz when match five only");
     }
 
-    @ParameterizedTest(name = "Say {0} = {1}")
-    @CsvSource({
-            "15,   FizzBuzz",
-            "30,   FizzBuzz",
-            "45,   FizzBuzz"
-    })
-    void SayFizzBuzz(int i, String expectResult){
-        assertEquals(expectResult, fizzBuzz.Say(i), "Say " + i + " should equal " + expectResult);
+    @Test
+    @DisplayName("Say When Match 3 and 5")
+    void SayWhenMatchThreeAndFive(){
+        fizzBuzz = spy(fizzBuzz);
+        int matchThreeAndFive = 15;
+        when(fizzBuzz.isThreeMatched(matchThreeAndFive)).thenReturn(true);
+        when(fizzBuzz.isFiveMatched(matchThreeAndFive)).thenReturn(true);
+        assertEquals("FizzBuzz", fizzBuzz.Say(matchThreeAndFive), "Say FizzBuzz when match three and Fiver");
     }
 
     static class FizzBuzzStub extends FizzBuzz{
