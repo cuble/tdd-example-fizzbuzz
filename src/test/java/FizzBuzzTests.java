@@ -36,6 +36,21 @@ public class FizzBuzzTests {
 
     @ParameterizedTest(name = "Say {0} = {1}")
     @CsvSource({
+            "1,   false",
+            "2,   false",
+            "7,   false",
+            "3,   true",
+            "6,   true",
+            "9,   true"
+    })
+    void MatchThreeTest(int i, Boolean expectResult){
+        assertEquals(expectResult, fizzBuzz.isThreeMatched(i), i + " Match three " + expectResult);
+    }
+
+
+
+    @ParameterizedTest(name = "Say {0} = {1}")
+    @CsvSource({
             "3,   Fizz",
             "6,   Fizz",
             "9,   Fizz"

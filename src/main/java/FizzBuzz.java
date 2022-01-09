@@ -21,4 +21,8 @@ public class FizzBuzz {
         FizzBuzz fizzBuzz = new FizzBuzz();
         System.out.println(fizzBuzz.Print(100));
     }
+
+    public Boolean isThreeMatched(int i) {
+        return i%3==0;
+    }
 }
