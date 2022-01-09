@@ -12,8 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FizzBuzzTests {
@@ -47,6 +46,14 @@ public class FizzBuzzTests {
         assertEquals(expectResult, fizzBuzz.isThreeMatched(i), i + " Match three " + expectResult);
     }
 
+    @Test
+    @DisplayName("Say When Match Three")
+    void SayWhenMatchThree(){
+        fizzBuzz = spy(fizzBuzz);
+        int notMatch = 1;
+        when(fizzBuzz.isThreeMatched(notMatch)).thenReturn(false);
+        assertEquals(String.valueOf(notMatch), fizzBuzz.Say(notMatch), "three not match return number itself");
+    }
 
 
     @ParameterizedTest(name = "Say {0} = {1}")
